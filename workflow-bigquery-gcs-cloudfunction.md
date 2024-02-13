@@ -29,4 +29,22 @@ Voici à quoi va ressembler notre pipeline dans un premier temps :
 
 ## Traiter les données
 
-* 
+* En utilisant l'opérateur BigQueryOperator https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/bigquery.html 
+* Traiter les données (vérifier les duplications par exemple)
+
+## Aggréger les données
+
+* Avec le même opérateur BigQueryOperator, aggréger les données
+
+## Exécuter le pipeline
+
+* Charger votre fichier dans le bucket de votre environnement composer
+* Executer le
+
+## Pour aller plus loin
+
+* Voir ici pour la construction d'un tableau de bord avec Data Studio : https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/bigquery.html
+
+## Solution : 
+
+https://github.com/GaryYiu/shared_repo/blob/main/crime_airflow_docker/dags/london_crime_data_pipeline.py
