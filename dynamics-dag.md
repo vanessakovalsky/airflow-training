@@ -59,8 +59,8 @@ Cela nous permet d'avoir un dag ressemblant à ça :
 * * Utiliser un branch operateur qui va vérifier notre condition : https://docs.astronomer.io/learn/airflow-branch-operator 
   * Pour vérifier la présence d'un fichier sur un bucket on peut utiliser GCSObjectExistenceSensor : https://registry.astronomer.io/providers/google/versions/latest/modules/gcsobjectexistencesensor
   * Créer une tache qui utilise le PythonOperator et contient le code suivant (vous pouvez aussi mettre ce code dans Cloud function et déclencher la fonction avec l'operator SimpleHTTPOperator) :
-  ```python
-  from google.cloud import storage
+```python
+from google.cloud import storage
 
 def write_read(bucket_name, blob_name):
     """Write and read a blob from GCS using file-like IO"""
