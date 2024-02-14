@@ -42,6 +42,16 @@ Cela nous permet d'avoir un dag ressemblant à ça :
 
 ## Regrouper ces tâches avec un groupe de tâches
 
+* Nous voulons modifier le dag de départ pour que les taches 1 et 2 soit regroupé dans un groupe de tache, et les tache 3 et 4 dans un autre.
+* Le DAG ressemblera alors à :
+![](https://cloud.google.com/static/composer/docs/images/workflow-taskgroup-dag.png)
+
+* Pour cela modifier votre dag de la manière suivante à l'aide de la documentation https://docs.astronomer.io/learn/task-groups :
+* * Créer un TaskGroup1 contenant les taches 1 et 2
+  * Créer un TaskGroup2 contenant les taches 3 et 4
+  * Modifier l'ordonnancement de votre DAG pour appeler les groupes de taches plutôt que les taches 1,2 et 3,4.
+* Une fois les modifications apportées, vous pouvez importer votre DAG et l'exécuter
+
 ## Ajouter des conditions et utiliser le BranchOperator
 
 ## Ajouter une notification par mail
