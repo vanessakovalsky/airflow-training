@@ -120,4 +120,5 @@ def write_read(bucket_name, blob_name):
 
  ## Pour aller plus loin
 
- * Mettre en place un DAG déclenché par Pub/Sub sur lesquels les messages sont publiés par Cloud Functions : https://cloud.google.com/composer/docs/composer-2/triggering-gcf-pubsub?hl=fr 
+ * Mettre en place un DAG déclenché par Pub/Sub sur lesquels les messages sont publiés par Cloud Functions : https://cloud.google.com/composer/docs/composer-2/triggering-gcf-pubsub?hl=fr
+ * Utiliser les templatesfield : https://www.restack.io/docs/airflow-knowledge-apache-templates-fields
