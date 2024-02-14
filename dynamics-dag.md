@@ -87,8 +87,37 @@ def write_read(bucket_name, blob_name):
 
 ## Ajouter une notification par mail
 
+* Nous voulons ensuite ajouter une notification par email lorsque notre DAG a terminé (quelque soit le résultat).
+* Pour cela :
+* * : Configurer votre environnement composer pour pouvoir envoyer des emails : https://cloud.google.com/composer/docs/configure-email?hl=fr
+  * Ajouter une tache d'envoi d'email avec l'opérateur Emailoperator (vous avez un exemple dans lien ci dessus)
+* Charger votre DAG et exécuter le pour voir le résultat
+
 ## Faire passer des données d'une tâches à une autre
+
+* Lors de l'envoi du fichier sur le bucket nous voulons récupérer l'URI du fichier et la mettre dans l'email envoyé
+* Pour cela, nous allons devoir récupérer la données de la tâche de dépôt de fichier, puis la transmettre à la tâche d'envoi d'email
+* Nous allons donc utiliser les Xcom pour le faire, voir un exemple ici : https://marclamberti.com/blog/airflow-xcom/
+* Charger votre DAG et exécuter le pour voir le résultat
 
 ## Utiliser les paramètres
 
+* Nous voulons rendre le nom du bucket et du fichier utilisé paramètrables
+* * Définir au niveau du DAG les params : bucket et filename (tout deux de type string et obligatoire) : voir ici : https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/params.html#dag-level-params
+  * Dans les tâches qui ont besoin de ces informations utiliser les paramètres : https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/params.html#referencing-params-in-a-task
+* Charger votre DAG et exécuter le pour voir le résultat
+
+
 ## Utiliser les templates
+
+* Lors de l'envoi du mail nous voulons ajouter certains paramètres dans le corps du mail
+* * Récupérer dans les templates disponibles https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html les paramètres suivants :
+  * Id du DAG run
+  * Nom du dag
+  * Instance de la tâche
+  * Afficher ces paramètres dans le corps du mail envoyé
+* Charger votre DAG et exécuter le pour voir le résultat
+
+ ## Pour aller plus loin
+
+ * Mettre en place un DAG déclenché par Pub/Sub sur lesquels les messages sont publiés par Cloud Functions : https://cloud.google.com/composer/docs/composer-2/triggering-gcf-pubsub?hl=fr 
