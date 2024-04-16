@@ -1,7 +1,6 @@
- Rendre son DAG dynamique
+## Ajouter des dépenances à un DAG
 
-Cet exercice vous permet pas à pas d'ajouter du dynamisme dans votre DAG
-
+Cet exercice vous permet pas à pas d'ajouter des dépendances dans un DAG
 ## DAG de départ
 
 Cet exercice nécessite les éléments suivant :
