@@ -1,4 +1,4 @@
-## Ajouter des dépenances à un DAG
+## Ajouter des dépendances à un DAG
 
 Cet exercice vous permet pas à pas d'ajouter des dépendances dans un DAG
 ## DAG de départ
