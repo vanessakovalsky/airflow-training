@@ -15,7 +15,7 @@ def pull_file():
     def write_read(bucket_name, blob_name):
         """Write and read a blob from GCS using file-like IO"""
         # The ID of your GCS bucket
-        bucket_name = "europe-west9-formationairfl-d4ff149a-bucket "
+        bucket_name = "europe-west9-formationairfl-d4ff149a-bucket"
 
         # The ID of your new GCS object
         blob_name = "/data/demo.txt"
