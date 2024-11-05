@@ -1,6 +1,32 @@
 ## Faire passer des données d'une tâches à une autre
 
-* Lors du traitement de données nous voulons récupérer des paramètres pour les passer à une derniere tache.
+* Créer un DAG avec une tache qui va aller lire le fichier demo.txt sur le bucket (le nom du bucket vous est donné par le formateur) et qui contient le code suivant (la tache utilise Python operator)
+```
+
+from google.cloud import storage
+
+def write_read(bucket_name, blob_name):
+    """Write and read a blob from GCS using file-like IO"""
+    # The ID of your GCS bucket
+    bucket_name = "your-bucket-name"
+
+    # The ID of your new GCS object
+    # blob_name = "storage-object-name"
+
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+
+    # Mode can be specified as wb/rb for bytes mode.
+    # See: https://docs.python.org/3/library/io.html
+    with blob.open("w") as f:
+        f.write("Hello world")
+
+    with blob.open("r") as f:
+        print(f.read())
+
+```
+* Lors du traitement de données nous voulons récupérer le contenu du fichier et le passer à une dernière tache qui sera en charge d'afficher le contenu du fichier.
 * Nous allons donc utiliser les Xcom pour le faire, voir un exemple ici : https://marclamberti.com/blog/airflow-xcom/
 * Charger votre DAG et exécuter le pour voir le résultat
 
