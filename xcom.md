@@ -2,8 +2,7 @@
 
 * Créer un DAG avec une tache qui va aller lire le fichier demo.txt sur le bucket (le nom du bucket vous est donné par le formateur) et qui contient le code suivant (la tache utilise Python operator)
 ```
-from airflow.decorators import dag, task_group
-from airflow.operators import DummyOperator
+from airflow.decorators import dag, task
 from google.cloud import storage
 
 from pendulum import datetime
