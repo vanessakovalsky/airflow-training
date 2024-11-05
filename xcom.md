@@ -12,19 +12,20 @@ from pendulum import datetime
 @dag(start_date=datetime(2024,11,5), schedule=None, catchup=False)
 def pull_file():
     @task(task_id="lecture_fichier")
-    def write_read(bucket_name, blob_name):
+    def write_read():
         """Write and read a blob from GCS using file-like IO"""
         # The ID of your GCS bucket
         bucket_name = "europe-west9-formationairfl-d4ff149a-bucket"
 
         # The ID of your new GCS object
-        blob_name = "/data/demo.txt"
+        blob_name = "data/demo.txt"
 
         storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(blob_name)
         with blob.open("r") as f:
-            return (f.read())
+            texte =  f.read()
+        return texte
     write_read()
 
 
