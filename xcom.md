@@ -2,29 +2,34 @@
 
 * Créer un DAG avec une tache qui va aller lire le fichier demo.txt sur le bucket (le nom du bucket vous est donné par le formateur) et qui contient le code suivant (la tache utilise Python operator)
 ```
-
+from airflow.decorators import dag, task_group
+from airflow.operators import DummyOperator
 from google.cloud import storage
 
-def write_read(bucket_name, blob_name):
-    """Write and read a blob from GCS using file-like IO"""
-    # The ID of your GCS bucket
-    bucket_name = "your-bucket-name"
+from pendulum import datetime
 
-    # The ID of your new GCS object
-    # blob_name = "storage-object-name"
 
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(blob_name)
 
-    # Mode can be specified as wb/rb for bytes mode.
-    # See: https://docs.python.org/3/library/io.html
-    with blob.open("w") as f:
-        f.write("Hello world")
+@dag(start_date=datetime(2024,11,5), schedule=None, catchup=False)
+def pull_file():
+    @task(task_id="lecture_fichier")
+    def write_read(bucket_name, blob_name):
+        """Write and read a blob from GCS using file-like IO"""
+        # The ID of your GCS bucket
+        bucket_name = "europe-west9-formationairfl-d4ff149a-bucket "
 
-    with blob.open("r") as f:
-        print(f.read())
+        # The ID of your new GCS object
+        blob_name = "/data/demo.txt"
 
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(bucket_name)
+        blob = bucket.blob(blob_name)
+        with blob.open("r") as f:
+            return (f.read())
+    write_read()
+
+
+pull_file() 
 ```
 * Lors du traitement de données nous voulons récupérer le contenu du fichier et le passer à une dernière tache qui sera en charge d'afficher le contenu du fichier.
 * Nous allons donc utiliser les Xcom pour le faire, voir un exemple ici : https://marclamberti.com/blog/airflow-xcom/
