@@ -40,7 +40,7 @@ with DAG(
     # Config variables
     HTTP_CONN_ID = "my_cloudfunction_conn"
     BQ_CONN_ID = "my_gcp_conn"
-    BQ_PROJECT = "fifth-jigsaw-414110"
+    BQ_PROJECT = "formationgcp-417109"
     BQ_DATASET = "london"
 
     ## Task 2: trigger the cloud function to fetch crime data  
