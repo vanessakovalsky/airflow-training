@@ -2,11 +2,14 @@ from airflow import DAG
 import datetime as dt
 from airflow.operators.bash import BashOperator
 from airflow.operators.email import EmailOperator
-from mail import send_mail
 
 default_args = {
     "email":['vanessakovalsky@gmail.com'],
     "email_on_failure":True
+}
+
+default_params = {
+    "to":"vanessakovalsky@gmail.com"
 }
 
 dag = DAG(
@@ -14,19 +17,8 @@ dag = DAG(
     schedule_interval="@yearly",
     start_date=dt.datetime(1988,12,9,1,45),
     catchup=False,
-    default_args=default_args
-)
-
-def send_email_retry(**context)
-    titre="Un super memail"
-    contenu = "Le contenu du mail"
-    send_mail("vanessakovalsky@gmail.com", titre, contenu)
-
-hello = BashOperator(
-    task_id="hello",
-    dag=dag,
-    bash_command="echo 'Bonjour à tous!'"
-    on_retry_callback = MySendEmailRetry()
+    default_args=default_args,
+    params=default_params
 )
 
 task2 = BashOperator(
@@ -38,11 +30,13 @@ task2 = BashOperator(
     email_on_retry=True
 )
 
+
+
 task3 = EmailOperator(
     task_id="email_task",
-    to=['vanessakovalsky@gmail.com'],
+    to='{{params.to}}',
     subject="Hello from Airflow!",
-    html_content="<i>Message from Airflow</i>"
+    html_content="<i>Message from Airflow</i><br />{{ run_id }}</br>{{dag}}<br />{{ti}}"
 )
 
-hello >> task2 >> task3
+task2 >> task3
